@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:index,:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy,:assign_admin_status,:remove_admin_status]
+  before_action :check_user_is_admin, only: [:index,:assign_admin_status,:remove_admin_status]
   # GET /users
   # GET /users.json
   def index
@@ -61,6 +62,14 @@ class UsersController < ApplicationController
       format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+  def assign_admin_status
+    @user.update_attribute :admin, true
+    redirect_to users_path, notice: 'ADMIN status was assigned succesfully.'
+  end
+  def remove_admin_status
+    @user.update_attribute :admin, false
+    redirect_to users_path, notice: 'ADMIN status was removed succesfully.'
   end
 
   private
