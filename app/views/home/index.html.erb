@@ -1,26 +1,28 @@
 
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<div class="container col-sm">
+  <h1>Home#index</h1>
+  <p>Find me in app/views/home/index.html.erb</p>
 
 
-<ul>
-  <% if user_signed_in? %>
-    <li>
-      <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
-    </li>
-    <li>
-      <%=current_user.email %>
-    </li>
-    <li>
-      <%= link_to 'User index', users_path %>
-    </li>
-  <% else %>
-    <li>
-      <%= link_to 'Sign in', user_session_path %>
-    </li>
-    <li>
-      <%= link_to 'Sign Up', new_user_registration_path %>
-    </li>
-  <% end %>
-  
-</ul>
+  <ul>
+    <% if user_signed_in? %>
+      <li>
+        <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
+      </li>
+      <li>
+        <%=current_user.email %>
+      </li>
+      <li>
+        <%= link_to 'User index', users_path %>
+      </li>
+    <% else %>
+      <li>
+        <%= link_to 'Sign in', user_session_path %>
+      </li>
+      <li>
+        <%= link_to 'Sign Up', new_user_registration_path %>
+      </li>
+    <% end %>
+    
+  </ul>
+</div>

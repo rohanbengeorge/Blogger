@@ -1,0 +1,39 @@
+<h1>Posts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Content</th>
+      <th>Likes</th>
+      <th>Comments</th>
+      <th>Is public</th>
+      <th>Is drafted</th>
+      <th>Tags</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @posts.each do |post| %>
+      <tr>
+        <td><%= post.id%></td>
+
+        <td><%= post.title %></td>
+        <td><%= post.content %></td>
+        <td><%= post.likes %></td>
+        <td><%= post.comments %></td>
+        <td><%= post.is_public %></td>
+        <td><%= post.is_drafted %></td>
+        <td><%= post.tags %></td>
+        <td><%= link_to 'Show', [current_user, post]  %></td>
+        <td><%= link_to 'Edit', edit_user_post_path(id:post.id) %></td>
+        <td><%= link_to 'Destroy', [current_user,post], method: :delete, data: { confirm: 'Are you sure?' } %></td> %> %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Post', new_user_post_path %>
