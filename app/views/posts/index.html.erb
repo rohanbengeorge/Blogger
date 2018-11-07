@@ -28,7 +28,7 @@
         <td><%= post.tags %></td>
         <td><%= link_to 'Show', [current_user, post]  %></td>
         <td><%= link_to 'Edit', edit_user_post_path(id:post.id) %></td>
-        <td><%= link_to 'Destroy', [current_user,post], method: :delete, data: { confirm: 'Are you sure?' } %></td> %> %>
+        <td><%= link_to 'Destroy', [current_user,post], method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

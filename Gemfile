@@ -15,8 +15,8 @@ gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
 gem 'pg', '~> 0.18'
-gem 'bootstrap', '~> 4.1.3'
 gem 'bootstrap-sass'
+gem 'bootstrap'
 gem 'jquery-rails'
 gem 'devise'
 # Use CoffeeScript for .coffee assets and views
