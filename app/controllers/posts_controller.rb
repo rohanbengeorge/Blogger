@@ -5,7 +5,9 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
 
   def index
-    @posts = current_user.posts.all
+    @user = User.find(params[:user_id])
+    @posts = @user.posts.all
+    
   end
 
   def show; end

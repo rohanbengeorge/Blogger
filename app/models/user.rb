@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :lockable
   has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
   def account_active?
     return false if ban_till_date > Date.today
 

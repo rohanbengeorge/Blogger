@@ -9,7 +9,9 @@ Rails.application.routes.draw do
       post 'remove_admin_status'
       post 'ban_user'
     end
-    resources :posts
+    resources :posts do
+      resources :comment
+    end
   end
   root 'home#index'
 end

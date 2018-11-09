@@ -55,7 +55,7 @@ class UsersController < ApplicationController
   def ban_user
     @user.ban_till_date = Date.today + params[:ban_days].to_i.days
     @user.save
-    redirect_to users_path
+    render json: { status: 'ok' }
   end
 
   private
