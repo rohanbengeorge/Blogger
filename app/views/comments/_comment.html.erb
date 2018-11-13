@@ -1,9 +1,7 @@
-<li id="comment-<%= comment.id %>">
-  
-  <span class="user"><%= link_to comment.user.first_name, comment.user %></span>
-  <span class="content"><%= comment.content %></span>
-  <%= link_to 'Reply', new_user_post_comment_path(post_id:comment.post_id) %>
-  <span class="timestamp">
-    Posted <%= time_ago_in_words(comment.created_at) %> ago.
-  </span>
-</li>
+<% if comment.parent_id != nil %>
+  <% unless Comment.exists?(comment.parent_id) %>
+    <%= render 'comments/list_comments' , comment: comment %>
+  <% end %>
+<% else %>
+  <%= render 'comments/list_comments' , comment: comment %>
+<% end %>

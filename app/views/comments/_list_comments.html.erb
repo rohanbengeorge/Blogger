@@ -1,0 +1,23 @@
+<li id="comment-<%= comment.id %>">
+    
+  <span class="user"><%= link_to comment.user.first_name, comment.user %></span>
+  <span class="content"><%= comment.content %></span>
+  <%= link_to 'Reply', new_user_post_comment_path(post_id:comment.post_id,parent_id:comment.id) %>
+  <%= link_to 'Edit', edit_user_post_comment_path(post_id:comment.post_id,id:comment.id) %>
+  <%= link_to 'Destroy', user_post_comment_path(post_id:comment.post_id,id:comment.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+  <span class="timestamp">
+    Posted <%= time_ago_in_words(comment.created_at) %> ago.
+  </span>
+
+  <div class = "nested_comments">
+    <% comments = comment.replies%>
+    <%if comment != nil %>
+      <ol>
+      <% comments.each do |comment|%>
+        <%= render partial: 'comments/list_comments' ,locals: { comment: comment } %>
+      <% end %>
+      </ol>
+    <%end%>
+  </div >
+</li>
+  

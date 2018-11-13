@@ -34,6 +34,9 @@
       Posted <%= time_ago_in_words(post.created_at) %> ago.
     </span>
     <br>
+    <%= link_to 'Like', [current_user,post] %>
+    <%= link_to 'Comment',new_user_post_comment_path(post_id:post.id,)%>
+    
 
     <%@comments = post.comments.paginate(page: params[:page])%>
     <div class="col-sm-12">

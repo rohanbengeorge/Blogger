@@ -10,7 +10,7 @@ Rails.application.routes.draw do
       post 'ban_user'
     end
     resources :posts do
-      resources :comment
+      resources :comments
     end
   end
   root 'home#index'
