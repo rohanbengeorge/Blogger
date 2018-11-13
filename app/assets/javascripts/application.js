@@ -16,7 +16,7 @@
 //= require jquery3
 //= require bootstrap
 //= require popper
-//= require jquery_nested_form
+
 //= require users
 
 //= require_tree .
