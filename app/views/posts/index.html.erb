@@ -26,6 +26,14 @@
     <%= post.is_public %>
     <%= post.is_drafted %>
     <%= post.tags %>
+
+    <div class="image_container">
+      <% if post.images.attached? %>
+        <% post.images.each do |image| %>
+          <%= image_tag url_for(image), class: "image" %>
+        <% end %>
+      <% end %>
+    </div>
     <%= link_to 'Show', [current_user, post]  %>
     <%= link_to 'Edit', edit_user_post_path(id:post.id) %>
     <%= link_to 'Destroy', [current_user,post], method: :delete, data: { confirm: 'Are you sure?' } %>
