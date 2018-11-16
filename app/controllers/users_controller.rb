@@ -2,8 +2,8 @@
 
 # Controller for user CRUD operation, to assign and remove adminand to ban user
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: %i[index show edit update destroy]
-  before_action :set_user, only: %i[show edit update destroy ban_user assign_admin_status remove_admin_status]
+  before_action :authenticate_user!, only: %i[index show edit update destroy following followers]
+  before_action :set_user, only: %i[show edit update destroy ban_user assign_admin_status remove_admin_status  following followers]
   before_action :check_user_is_admin, only: %i[index ban_user assign_admin_status remove_admin_status]
 
   def index
@@ -57,6 +57,19 @@ class UsersController < ApplicationController
     @user.save
     render json: { status: 'ok' }
   end
+
+  def following
+    @title = "Following"
+    @users = @user.following.paginate(page: params[:page])
+    render 'show_follow'
+  end
+
+  def followers
+    @title = "Followers"
+       @users = @user.followers.paginate(page: params[:page])
+    render 'show_follow'
+  end
+
 
   private
 

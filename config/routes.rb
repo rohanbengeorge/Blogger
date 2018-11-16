@@ -2,6 +2,10 @@
 
 Rails.application.routes.draw do
   get 'home/index'
+  get 'home/personal_feeds'
+  get 'home/all_public_feeds'
+  get 'home/all_feeds'
+
   devise_for :users
   resources :users do
     member do
@@ -12,6 +16,10 @@ Rails.application.routes.draw do
     resources :posts do
       resources :comments
     end
+    member do
+      get :following, :followers
+    end
+    resources :relationships, only: [:destroy, :create]
   end
   root 'home#index'
 end
