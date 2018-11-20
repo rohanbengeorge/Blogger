@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get 'search/index'
   get 'home/index'
   get 'home/personal_feeds'
   get 'home/all_public_feeds'

@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   before_action :check_user_is_admin, only: %i[index ban_user assign_admin_status remove_admin_status]
 
   def index
+    p params
     @users = User.all
   end
 

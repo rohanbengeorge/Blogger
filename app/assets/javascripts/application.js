@@ -20,5 +20,3 @@
 //= require users
 
 //= require_tree .
-
-
