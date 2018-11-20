@@ -1,0 +1,40 @@
+<header class="navbar navbar-fixed-top navbar-inverse">
+  <div class="container">
+    <%= link_to "Q-Book", root_path, id: "logo" %>
+    <nav>
+      <ul class="nav navbar-nav navbar-right justify-content-between">
+        <li id = "search_bar">
+          
+          <form class="form-inline ">
+            <input class="form-control mr-sm-2" id="search_input" type="search" autocomplete="off" placeholder="Search" aria-label="Search">
+          </form>        
+          
+          <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle_search disp-none" type="button" >Tutorials</button>
+            <ul class="dropdown-menu" id = "search_result"></ul>
+          </div>
+
+        </li>
+        <li><%= link_to "Home",   root_path %></li>
+        <% if user_signed_in? %>
+          <li><%= link_to "Users", users_path %></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <%= current_user.first_name %> <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "Profile", current_user %></li>
+              <li><%= link_to "Settings", edit_user_path(current_user) %></li>
+              <li class="divider"></li>
+              <li>
+                <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+              </li>
+            </ul>
+          </li>
+        <% else %>
+          <li><%= link_to "Sign in", user_session_path %></li>
+        <% end %>
+      </ul>
+    </nav>
+  </div>
+</header>

@@ -33,6 +33,7 @@ class PostsController < ApplicationController
 
   def update
     respond_to do |format|
+      
       if @post.update(post_params)
         format.html { redirect_to user_posts_path, notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @post }
@@ -58,6 +59,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :content, :likes, :comments, :is_public, :is_drafted, :tags, :user_id, images: [])
+    params.require(:post).permit(:title, :content, :likes, :comments, :is_public, :is_drafted, :tags, :user_id, images:[])
   end
 end

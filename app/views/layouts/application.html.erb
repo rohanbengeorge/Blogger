@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Blogger</title>
+    <title><%= full_title(yield(:title)) %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,6 +9,8 @@
   </head>
 
   <body>
+    <%= render 'layouts/header' %>
+
     <% if notice %>
      <p class="alert alert-success"><%= notice %></p>
     <% end %>
@@ -19,5 +21,7 @@
      <p class="alert alert-danger"><%= flash[:error] %></p>
     <% end %>
     <%= yield %>
+    <%= render 'layouts/footer' %>
+
   </body>
 </html>

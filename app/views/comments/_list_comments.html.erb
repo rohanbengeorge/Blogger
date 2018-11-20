@@ -2,9 +2,9 @@
     
   <span class="user"><%= link_to comment.user.first_name, comment.user %></span>
   <span class="content"><%= comment.content %></span>
-  <%= link_to 'Reply', new_user_post_comment_path(post_id:comment.post_id,parent_id:comment.id) %>
-  <%= link_to 'Edit', edit_user_post_comment_path(post_id:comment.post_id,id:comment.id) %>
-  <%= link_to 'Destroy', user_post_comment_path(post_id:comment.post_id,id:comment.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+  <%= link_to 'Reply', new_user_post_comment_path(post_id:comment.post_id,parent_id:comment.id,user_id:current_user.id) %>
+  <%= link_to 'Edit', edit_user_post_comment_path(post_id:comment.post_id,id:comment.id,user_id:current_user.id) %>
+  <%= link_to 'Destroy', user_post_comment_path(post_id:comment.post_id,id:comment.id,user_id:current_user.id), method: :delete, data: { confirm: 'Are you sure?' } %>
   <span class="timestamp">
     Posted <%= time_ago_in_words(comment.created_at) %> ago.
   </span>

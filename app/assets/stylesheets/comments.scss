@@ -4,3 +4,6 @@
 .nested_comments {
   margin-left: 10px;
 }
+.nested_comments .nested_comments .nested_comments .nested_comments{
+  margin-left: 0;
+}
