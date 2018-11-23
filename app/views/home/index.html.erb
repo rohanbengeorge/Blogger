@@ -1,44 +1,45 @@
 
-<div class="container col-sm">
-  <h1>Home#index</h1>
-  <p>Find me in app/views/home/index.html.erb</p>
+<% if user_signed_in? %>
+  <div class="row">
+    <aside class="col-md-4">
+      <section class="user_info">
+        <%= render 'shared/user_info' %>
+      </section>
+      <section class="stats">
+        <%= render 'shared/stats' %>
+      </section>
+      <section class="new_post_form">
+        <%# button_to "New Post", { action: "new" }, form_class: "new-thing" %>
+        <%# render 'shared/micropost_form' %>
+        <% @post = current_user.posts.new %>
+        <%= render 'posts/form', post: @post %>
+      </section>
+    </aside>
 
-
-  <ul>
-    <% if user_signed_in? %>
-      <li>
-        <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
-      </li>
-      <li>
-        <%=current_user.email %>
-      </li>
-      <li>
-        <%= link_to 'User index', users_path %>
-      </li>
-
-      
-      <div class="row">
-        <aside class="col-md-4">
-          <section class="stats">
-            <%= render 'shared/stats' %>
-          </section>
-      </div>
+    <div class="col-md-8">
+      <h3>Feed</h3>
       <%= link_to 'Personal Feeds', home_personal_feeds_path, remote:true %>
       <%= link_to 'Public Feeds', home_all_public_feeds_path, remote:true %>
-      <%= link_to 'All feeds', home_all_feeds_path, remote:true %>
-
+      <% if current_user.admin? %>
+        <%= link_to 'All feeds', home_all_feeds_path, remote:true %>
+      <% end %>
       <div id = "posts">
         <%= render 'display_posts', posts: @posts %>
-
       </div>
-    <% else %>
-      <li>
-        <%= link_to 'Sign in', user_session_path %>
-      </li>
-      <li>
-        <%= link_to 'Sign Up', new_user_registration_path %>
-      </li>
-    <% end %>
-    
-  </ul>
-</div>
+    </div>
+  </div>
+
+
+<% else %>
+  <div class="center jumbotron">
+    <h1>Welcome to the Blogger App</h1>
+    <%= link_to 'Sign in', user_session_path , class: "btn btn-lg btn-success"%>
+    <%= link_to 'Sign Up', new_user_registration_path, class: "btn btn-lg btn-primary" %>
+  </div>
+  
+<% end %>
+
+
+
+
+

@@ -1,2 +1,4 @@
 $("#follow_form").html("<%= escape_javascript(render('users/follow')) %>");
 $("#followers").html('<%= @user.followers.count %>');
+$(".posts").html("<%= escape_javascript(render( @posts )) %>");
+$(".post_count").html('POSTS (<%= @user.posts.size %>)');

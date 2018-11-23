@@ -12,25 +12,22 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
+    <%= form.text_field :title, placeholder: "Enter the title..." %>
   </div>
 
   <div class="field">
-    <%= form.label :content %>
-    <%= form.text_area :content %>
+    <%= form.text_area :content, placeholder: "Type your content...."  %>
   </div>
 
+  <div class="field">
+    <%= form.text_area :tags, placeholder: "Tags....."  %>
+  </div>
+  
   <div class="field">
     <%= form.label :is_public %>
     <%= form.check_box :is_public %>
   </div>
 
-  <div class="field">
-    <%= form.label :tags %>
-    <%= form.text_area :tags %>
-  </div>
-  
   <div class="field">
     <%= form.label :Upload_image %>
     <%= form.file_field :images, multiple: true %>

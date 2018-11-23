@@ -17,4 +17,5 @@ class ApplicationController < ActionController::Base
       redirect_to user_path(current_user)
     end
   end
+
 end

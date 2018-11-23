@@ -1,0 +1,59 @@
+<div class="post_container p-3 ">
+  <div class='text-center lead'><%= post.title %></div>
+  <div class= 'post_contents'><%= post.content %></div>
+  <br>
+  <div class= 'post_tags'>Tags:<%= post.tags %></div>
+
+  <div class="image_container">
+    <% if post.images.attached? %>
+      <% post.images.each do |image| %>
+        <%= image_tag url_for(image), class: "image" %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="edit m-3">
+    <%# link_to 'Show', [current_user, post]  %>
+    <% if current_user == @user %>
+      <%= link_to 'Edit', edit_user_post_path(id:post.id,user_id:current_user.id) %>
+    <% end %>
+    <% if current_user == @user || current_user.admin?%>
+      <%= link_to 'Destroy', [current_user,post], method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %>
+    <% if post.is_public == true %>
+      <span class= 'post_public'>
+        <i class="fa fa fa-globe" style="font-size:20px;color:grey"></i>  Public
+      </span>
+    <% end %>
+    <span class="timestamp">
+      Posted <%= time_ago_in_words(post.created_at) %> ago.
+    </span>
+  </div>
+  
+  <div class="postlikecontainer row col-sm-12">
+    <div class="p-2 col-sm-6 d-flex flex-row-reverse">
+      <span class="text-dark"><i class="fa fa-thumbs-o-up" style="font-size:20px;color:black"></i>
+        Like 
+      </span>
+    </div>
+    <div class="p-2 col-sm-6 d-flex flex-row">
+      <%= link_to(new_user_post_comment_path(post_id:post.id, user_id:current_user.id), class: 'button white commentlink', remote: true) do %>
+        <span class="text-dark"><i class="fa fa-comments-o" style="font-size:20px;color:black"></i>
+          Comments
+        </span>
+     <% end %>
+    </div>
+    
+  </div>
+  <div id='new_comment_<%=post.id%>'></div>
+  <div class="col-sm-12">
+  <%@comments = post.comments.paginate(page: params[:page])%>
+    <% if post.comments.any? %>
+      <h4>Comments (<%= post.comments.count %>)</h4>
+      <ol id="comments_of_<%=post.id%>">
+        <%= render @comments %>
+      </ol>
+      <%= will_paginate @comments %>
+    <% end %>
+  </div>
+
+</div>

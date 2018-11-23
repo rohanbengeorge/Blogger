@@ -10,6 +10,8 @@ class User < ApplicationRecord
   has_many :passive_relationships, class_name:  "Relationship",foreign_key: "followed_id",dependent: :destroy
   has_many :following, through: :active_relationships,  source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
+  self.per_page = 10
+  has_one_attached :avatar
   def account_active?
     return false if ban_till_date > Date.today
 
@@ -37,5 +39,9 @@ class User < ApplicationRecord
   # Returns true if the current user is following the other user.
   def following?(other_user)
     following.include?(other_user)
+  end
+
+  def follows?(other)
+    following?(other)
   end
 end

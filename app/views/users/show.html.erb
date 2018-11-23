@@ -1,33 +1,29 @@
-<div class="container col-sm">
-  <h2>User Data</h2>
-  <p>
-    <strong>First name:</strong>
-    <%= @user.first_name %>
-  </p>
+<% provide(:title, @user.first_name) %>
 
-  <p>
-    <strong>Last name:</strong>
-    <%= @user.last_name %>
-  </p>
+<div class="row">
+  <aside class="col-md-3">
+    <section class="user_info">
+      <h1>
+        <%= avatar_for(@user) %>
+        <div><%= name(@user) %></div>
+        <div><%= @user.email %></div>
+        <div><% if current_user.admin? || current_user == @user %>
+          <%= link_to 'Edit', edit_user_path(@user) %>
+        <% end %></div>
+      </h1>
+    </section>
+    <section class="stats">
+      <%= render 'shared/stats' %>
+      <%= render 'follow_form' if signed_in? %>
+    </section>
+  </aside>
+  <div class="col-md-9">
+    <% if @posts.present? %>
+      <h3 class = "post_count">POSTS (<%= @posts.size %>)</h3>
+      <ol class="posts">
+        <%= render @posts %>
+      </ol>
+    <% end %>
 
-  <p>
-    <strong>Email:</strong>
-    <%= @user.email %>
-  </p>
-
-  <section class="stats">
-    <%= render 'shared/stats' %>
-  </section>
-  <%= render 'follow_form' if user_signed_in? %>
-
-  
-  <p><%= link_to 'Posts', user_posts_path(@user) %></p>
-
-  <%= link_to 'Edit', edit_user_path(@user) %> |
-  <%if current_user.admin?%>
-    <%= link_to 'Back', users_path %>
-  <% else %>
-     <%= link_to 'Back', home_index_path %>
-  <% end %>
-  
+  </div>
 </div>

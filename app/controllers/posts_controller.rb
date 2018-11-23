@@ -14,6 +14,10 @@ class PostsController < ApplicationController
 
   def new
     @post = current_user.posts.new
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def edit; end

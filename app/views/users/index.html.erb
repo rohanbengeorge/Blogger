@@ -24,42 +24,20 @@
 <div class="container col-sm">
   <h1>Users</h1>
 
-  <table  class="table table-hover">
-    <thead>
-      <tr>
-        <th>First name</th>
-        <th>Last name</th>
-        <th>Email</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
+  <%= will_paginate %>
 
-    <tbody>
-      <% @users.each do |user| %>
-        <tr>
-          <td><%= user.first_name %></td>
-          <td><%= user.last_name %></td>
-          <td><%= user.email %></td>
-          <td><%= link_to 'Show', user %></td>
-          <td><%= link_to 'Edit', edit_user_path(user) %></td>
-          <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          <% if user == current_user %>
-            <td><div >Current User</div></td>
-          <% else%>
-            <% if user.admin %>
-              <td><%= link_to 'Remove as Admin', remove_admin_status_user_path(user), method: :post, data: { confirm: 'Are you sure?' } %></td>
-            <% else %>
-              <td><%= link_to 'Assign as Admin', assign_admin_status_user_path(user), method: :post, data: { confirm: 'Are you sure?' } %></td>
-              <td><%= link_to "Ban User", "", :class => "btn", "data-toggle" => "modal", "data-target" => "#my-modal", "data-user" => user.id %></td>
-            <% end %>
-          <% end %>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-  <br>
+  <ul class="users">
+    <%= render @users %>
+  </ul>
 
-  <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>  
+  <%= will_paginate %>
+
 </div>
+
+
+
+
+
+
 
 

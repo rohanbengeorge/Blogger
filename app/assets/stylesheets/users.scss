@@ -147,12 +147,12 @@ aside {
   }
 }
 
-.gravatar {
+.avatar {
   float: left;
   margin-right: 10px;
 }
 
-.gravatar_edit {
+.avatar_edit {
   margin-top: 15px;
 }
 
@@ -182,7 +182,7 @@ aside {
 .user_avatars {
   overflow: auto;
   margin-top: 10px;
-  .gravatar {
+  .avatar {
     margin: 1px 1px;
   }
   a {
@@ -246,10 +246,17 @@ input {
     border-bottom: 1px solid $gray-lighter;
   }
 }
-
-/* microposts */
-
-.microposts {
+.avatar
+{
+  height: 100px;
+  width: 100px;
+}
+/* comments */
+.image{
+  height: 200px;
+  width: 200px;
+}
+.comments {
   list-style: none;
   padding: 0;
   li {
@@ -292,4 +299,16 @@ span.picture {
   input {
     border: 0;
   }
+}
+
+.post_container {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: #edf0f4;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.edit {
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
 }

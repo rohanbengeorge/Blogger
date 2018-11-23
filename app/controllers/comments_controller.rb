@@ -20,6 +20,10 @@ class CommentsController < ApplicationController
     @comment.post_id = params[:post_id]
     @comment.parent_id = params[:parent_id]
 
+    respond_to do |format|
+      format.html 
+      format.js
+    end
   end
 
   # GET /comments/1/edit
@@ -39,11 +43,17 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to user_posts_path, notice: 'Comment was successfully created.' }
+        flash[:notice] =  'Comment was successfully created.'
+        @post = Post.find(params["post_id"])
+        @all_comments = @post.comments.paginate(page: params[:page])
+        format.html
         format.json { render :show, status: :created, location: @comment }
+        format.js
       else
-        format.html { render :new }
+        flash[:notice] = 'Comment was not created.'
+        format.html
         format.json { render json: @comment.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end

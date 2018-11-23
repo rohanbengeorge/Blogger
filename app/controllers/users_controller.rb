@@ -3,21 +3,23 @@
 # Controller for user CRUD operation, to assign and remove adminand to ban user
 class UsersController < ApplicationController
   before_action :authenticate_user!, only: %i[index show edit update destroy following followers]
-  before_action :set_user, only: %i[show edit update destroy ban_user assign_admin_status remove_admin_status  following followers]
-  before_action :check_user_is_admin, only: %i[index ban_user assign_admin_status remove_admin_status]
+  before_action :set_user, only: %i[edit update destroy ban_user assign_admin_status remove_admin_status  following followers]
+  before_action :check_user_is_admin, only: %i[ban_user assign_admin_status remove_admin_status]
+  before_action :correct_user, only: [:edit, :update]
 
   def index
-    p params
-    @users = User.all
+    @users = User.paginate(:page => params[:page])
   end
 
-  def show
-    @post = Post.new
-  end
+    def show
+      @user = User.find params[:id]
+      @posts = Post.by @user
+      @posts = @posts.only_public unless current_user.follows? @user
+    end
 
   def new
     @user = User.new
-  end
+  end 
 
   def edit; end
 
@@ -67,7 +69,7 @@ class UsersController < ApplicationController
 
   def followers
     @title = "Followers"
-       @users = @user.followers.paginate(page: params[:page])
+    @users = @user.followers.paginate(page: params[:page])
     render 'show_follow'
   end
 
@@ -78,7 +80,11 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def correct_user
+    redirect_to(root_url) unless current_user == @user
+  end
+
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :avatar)
   end
 end
