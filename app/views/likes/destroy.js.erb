@@ -1,0 +1,1 @@
+$("#like_button_of_<%=@initial%><%=params['likes_id']%>").html("<%= escape_javascript(render('likes/like_button', post_id: @post_id, likes_type: params['likes_type'])) %>");

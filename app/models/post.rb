@@ -5,8 +5,7 @@ class Post < ApplicationRecord
   has_many_attached :images
   has_many :comments, dependent: :destroy
 
-  has_many :liked_by, through: :active_likes
-
+  has_many :likes, as: :likable
   default_scope -> { order(created_at: :desc) }
   scope :by, ->(user) { where(user_id: user.id) }
   scope :only_public, -> { where(is_public: true) }

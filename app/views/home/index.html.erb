@@ -24,7 +24,7 @@
         <%= link_to 'All feeds', home_all_feeds_path, remote:true %>
       <% end %>
       <div id = "posts">
-        <%= render 'display_posts', posts: @posts %>
+        <%= render @posts %>
       </div>
     </div>
   </div>

@@ -1,0 +1,10 @@
+<% @like = Like.find_by(
+      likes_id: post_id,
+      user_id: user_id,
+      likes_type: likes_type
+      )%>
+<% if @like.nil?  %>
+  <%= render 'likes/like_button', { post_id: post_id, likes_type: likes_type } %>
+<% else %>
+  <%= render 'likes/dislike_button', { post_id: post_id, likes_type: likes_type } %>
+<% end %>

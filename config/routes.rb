@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get 'home/personal_feeds'
   get 'home/all_public_feeds'
   get 'home/all_feeds'
-
+  resources :likes, only: [:destroy, :create]
   devise_for :users
   resources :users do
     member do

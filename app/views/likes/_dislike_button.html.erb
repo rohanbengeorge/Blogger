@@ -1,0 +1,5 @@
+<%= link_to(like_path(id: '1',likes_id:post_id, user_id:current_user.id, likes_type: likes_type), class: 'button white commentlink',method: 'delete', remote: true) do %>
+  <span class="text-dark"><i class="fa fa-thumbs-o-down" style="font-size:20px;color:black"></i>
+    DisLike 
+  </span>
+<% end %>
