@@ -2,7 +2,9 @@
   <div class='text-center lead'><%= post.title %></div>
   <div class= 'post_contents'><%= post.content %></div>
   <br>
-  <div class= 'post_tags'>Tags:<%= post.tags %></div>
+  <div class= 'post_tags'>
+    <p>Tags: <%= raw(post.tag_list.map { |t| link_to t, tag_path(t), remote:true }.join(', ')) %></p>
+  </div>
 
   <div class="image_container">
     <% if post.images.attached? %>
@@ -11,14 +13,16 @@
       <% end %>
     <% end %>
   </div>
+  <div class="h-4"><span>Posted By </span><%= name(post.user) %></div>
   <div class="edit m-3">
     <%# link_to 'Show', [current_user, post]  %>
-    <% if current_user == @user %>
+    <% if current_user.id == post.user_id %>
       <%= link_to 'Edit', edit_user_post_path(id:post.id,user_id:current_user.id) %>
     <% end %>
-    <% if current_user == @user || current_user.admin?%>
+    <% if current_user.id == post.user_id || current_user.admin?%>
       <%= link_to 'Destroy', [current_user,post], method: :delete, data: { confirm: 'Are you sure?' } %>
     <% end %>
+
     <% if post.is_public == true %>
       <span class= 'post_public'>
         <i class="fa fa fa-globe" style="font-size:20px;color:grey"></i>  Public
@@ -27,6 +31,7 @@
     <span class="timestamp">
       Posted <%= time_ago_in_words(post.created_at) %> ago.
     </span>
+
   </div>
   
   <div class="postlikecontainer row col-sm-12">
@@ -51,6 +56,8 @@
         <%= render @comments %>
       </ol>
       <%= will_paginate @comments %>
+    <% else %>
+      <ol id="comments_of_<%=post.id%>"></ol>
     <% end %>
   </div>
 

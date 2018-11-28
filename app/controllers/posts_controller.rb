@@ -7,7 +7,6 @@ class PostsController < ApplicationController
   def index
     @user = User.find(params[:user_id])
     @posts = @user.posts.all
-    
   end
 
   def show; end
@@ -26,7 +25,10 @@ class PostsController < ApplicationController
     @post = current_user.posts.new(post_params)
     respond_to do |format|
       if @post.save
-        format.html { redirect_to user_posts_path, notice: 'Post was successfully created.' }
+        format.html {
+          redirect_back(fallback_location: root_path,
+                        notice: 'Post was successfully created.')
+        }
         format.json { render :show, status: :created, location: @post }
       else
         format.html { render :new }
@@ -37,9 +39,11 @@ class PostsController < ApplicationController
 
   def update
     respond_to do |format|
-      
       if @post.update(post_params)
-        format.html { redirect_to user_posts_path, notice: 'Post was successfully updated.' }
+        format.html {
+          redirect_back(fallback_location: root_path,
+                        notice: 'Post was successfully updated.')
+        }
         format.json { render :show, status: :ok, location: @post }
       else
         format.html { render :edit }
@@ -51,7 +55,7 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     respond_to do |format|
-      format.html { redirect_to user_posts_url, notice: 'Post was successfully destroyed.' }
+      format.html { redirect_back(fallback_location: root_path, notice: 'Post was successfully destroyed.') }
       format.json { head :no_content }
     end
   end
@@ -63,6 +67,8 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :content, :likes, :comments, :is_public, :is_drafted, :tags, :user_id, images:[])
+    params.require(:post).permit(:title, :content, :likes, :comments,
+                                 :is_public, :is_drafted, :tags, :tag_list,
+                                 :user_id, images: [])
   end
 end

@@ -4,10 +4,11 @@
     <aside class="col-md-4">
       <section class="user_info">
         <%= render 'shared/user_info' %>
-      </section>
+      </section>      
       <section class="stats">
         <%= render 'shared/stats' %>
       </section>
+      <hr>
       <section class="new_post_form">
         <%# button_to "New Post", { action: "new" }, form_class: "new-thing" %>
         <%# render 'shared/micropost_form' %>
@@ -18,11 +19,26 @@
 
     <div class="col-md-8">
       <h3>Feed</h3>
-      <%= link_to 'Personal Feeds', home_personal_feeds_path, remote:true %>
-      <%= link_to 'Public Feeds', home_all_public_feeds_path, remote:true %>
-      <% if current_user.admin? %>
-        <%= link_to 'All feeds', home_all_feeds_path, remote:true %>
-      <% end %>
+
+      <div class="dropdown ">
+          <input type="button" id="select_feed" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" value="Select Feeds">
+          <ul id="feed-dropdown-menu" class="dropdown-menu">
+            <li id='1'><%= link_to 'Personal Feeds', home_personal_feeds_path, remote:true %></li>
+            <li id='2'><%= link_to 'Public Feeds', home_all_public_feeds_path, remote:true %></li>
+            <% if current_user.admin? %>
+              <li id='3'><%= link_to 'All feeds', home_all_feeds_path, remote:true %></li>
+            <% end %>
+          </ul>
+      </div>
+
+      <div class="dropdown ">
+          <input type="button" id="select_sort" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" value="Sort By">
+          <ul id="sort-dropdown-menu" class="dropdown-menu">
+            <li id='1'><%= link_to 'Date', home_all_public_feeds_path(sort_type: 'Date'), remote:true %></li>
+            <li id='2'><%= link_to 'Likes', home_all_public_feeds_path(sort_type: 'Likes'), remote:true %></li>
+          </ul>
+      </div>
+
       <div id = "posts">
         <%= render @posts %>
       </div>

@@ -12,28 +12,28 @@
   <% end %>
 
   <div class="field">
-    <%= form.text_field :title, placeholder: "Enter the title..." %>
+    <%= form.text_field :title, placeholder: "Enter the title...", class:"form-control" %>
   </div>
 
   <div class="field">
-    <%= form.text_area :content, placeholder: "Type your content...."  %>
+    <%= form.text_area :content, placeholder: "Type your content....", class:"form-control" %>
   </div>
 
-  <div class="field">
-    <%= form.text_area :tags, placeholder: "Tags....."  %>
+  <div class='field'>
+     <%= form.text_field :tag_list, placeholder: 'Tags (separated by commas)',class:"form-control" %>
   </div>
   
-  <div class="field">
-    <%= form.label :is_public %>
-    <%= form.check_box :is_public %>
+  <div class="field form-inline">
+    <%= form.label :is_public, class:"m-1" %>
+    <%= form.check_box :is_public,  class:"form-control" %>
   </div>
 
-  <div class="field">
+  <div class="field ">
     <%= form.label :Upload_image %>
     <%= form.file_field :images, multiple: true %>
   </div>
   
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Submit",class:"btn btn-success"%>
   </div>
 <% end %>

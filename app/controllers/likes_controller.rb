@@ -1,8 +1,11 @@
+# frozen_string_literal: true
+
+# Controller for Like
 class LikesController < ApplicationController
   def create
-    @like = current_user.likes.new(likes_id: params[:likes_id] )
+    @like = current_user.likes.new(likes_id: params[:likes_id])
     @like.likes_type = params[:likes_type]
-    @initial = params[:likes_type] == 'Post'? 'p' : 'c'
+    @initial = params[:likes_type] == 'Post' ? 'p' : 'c'
     @post_id = params[:likes_id]
     p params
     respond_to do |format|
@@ -22,9 +25,8 @@ class LikesController < ApplicationController
       user_id: params[:user_id],
       likes_type: params[:likes_type]
     )
-    @initial = params[:likes_type] == 'Post'? 'p' : 'c'
+    @initial = params[:likes_type] == 'Post' ? 'p' : 'c'
     @post_id = params[:likes_id]
-    @like.destroy unless @like.nil?
+    @like&.destroy
   end
 end
-

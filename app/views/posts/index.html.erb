@@ -35,7 +35,7 @@
       <% end %>
     </div>
     <%= link_to 'Show', [current_user, post]  %>
-    <%= link_to 'Edit', edit_user_post_path(id:post.id) %>
+    <%= link_to 'Edit', edit_user_post_path(id:post.id, user_id: current_user.id) %>
     <%= link_to 'Destroy', [current_user,post], method: :delete, data: { confirm: 'Are you sure?' } %>
     <br>
     <span class="timestamp">
@@ -43,12 +43,12 @@
     </span>
     <br>
     <%= link_to 'Like', [current_user,post] %>
-    <%= link_to 'Comment',new_user_post_comment_path(post_id:post.id,)%>
+    <%= link_to 'Comment',new_user_post_comment_path(post_id:post.id, user_id: current_user.id)%>
     
 
     <%@comments = post.comments.paginate(page: params[:page])%>
     <div class="col-sm-12">
-      <% if @user.comments.any? %>
+      <% if post.comments.any? %>
         <h3>Comments (<%= post.comments.count %>)</h3>
         <ol class="comments">
           <%= render @comments %>
@@ -63,5 +63,5 @@
 
 <br>
 
-<%= link_to 'New Post', new_user_post_path %>
+<%= link_to 'New Post', new_user_post_path(user_id: current_user.id) %>
 </div>

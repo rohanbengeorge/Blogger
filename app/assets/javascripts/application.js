@@ -18,5 +18,4 @@
 //= require popper
 
 //= require users
-
 //= require_tree .

@@ -307,8 +307,26 @@ span.picture {
   margin: 20px;
   display: flex;
   flex-direction: column;
+  padding: 10px;
 }
 
 .edit {
   border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.new_post_form
+{
+  // border-style: ridge;
+  padding: 5px;
+  //background-color: lightgrey;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
+  margin-left: 5px;
+}
+
+#select_feed {
+  width: 25% !important;
+}
+
+#select_sort{
+  width: 25% !important;
 }

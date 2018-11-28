@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'home/personal_feeds'
   get 'home/all_public_feeds'
   get 'home/all_feeds'
+  get 'tags/:tag', to: 'home#tagged_feeds', as: :tag
   resources :likes, only: [:destroy, :create]
   devise_for :users
   resources :users do
@@ -23,4 +24,5 @@ Rails.application.routes.draw do
     resources :relationships, only: [:destroy, :create]
   end
   root 'home#index'
+  # match '*path' => redirect('/'), via: :get
 end

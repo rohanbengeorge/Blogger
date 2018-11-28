@@ -4,9 +4,10 @@
   <span class="content"><%= comment.content %></span>  
   <span id="like_button_of_c<%=comment.id%>">
     <%= render 'likes/determine_like', post_id:comment.id, user_id:current_user.id, likes_type: 'Comment' %>
-  </span>
+  </span>&nbsp
   <%= link_to 'Reply', new_user_post_comment_path(post_id:comment.post_id, parent_id:comment.id, user_id:current_user.id), remote: true %>
-  <% if current_user == @user %>
+  <br>&nbsp
+  <% if current_user.id == comment.user_id %>
     <%= link_to 'Edit', edit_user_post_comment_path(post_id:comment.post_id, id:comment.id, user_id:current_user.id) %>
   <% end %>
   <% if current_user == @user || current_user.admin?%>
