@@ -5,7 +5,6 @@
   <div class= 'post_tags'>
     <p>Tags: <%= raw(post.tag_list.map { |t| link_to t, tag_path(t), remote:true }.join(', ')) %></p>
   </div>
-
   <div class="image_container">
     <% if post.images.attached? %>
       <% post.images.each do |image| %>
@@ -36,17 +35,19 @@
   
   <div class="postlikecontainer row col-sm-12">
     <div class="p-2 col-sm-6 d-flex flex-row-reverse" id="like_button_of_p<%=post.id%>">
-      <%= render 'likes/determine_like', post_id:post.id, user_id:current_user.id, likes_type: 'Post' %>
+      <span class="like_count lead" >(<%= post.like_count %>)</span>
+      <%= render 'likes/determine_like', post_id:post.id, user_id:current_user.id, likable_type: 'Post' %>
     </div>
+    
     <div class="p-2 col-sm-6 d-flex flex-row">
       <%= link_to(new_user_post_comment_path(post_id:post.id, user_id:current_user.id), class: 'button white commentlink', remote: true) do %>
         <span class="text-dark"><i class="fa fa-comments-o" style="font-size:20px;color:black"></i>
           Comments
         </span>
       <% end %>
-    </div>
-    
+    </div>    
   </div>
+
   <div id='new_comment_<%=post.id%>'></div>
   <div class="col-sm-12">
   <%@comments = post.comments.paginate(page: params[:page])%>

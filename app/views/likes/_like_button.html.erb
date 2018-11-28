@@ -1,4 +1,5 @@
-<%= link_to(likes_path(user_id: current_user.id, likes_id: post_id, likes_type: likes_type), class: 'button white commentlink',method: 'post', remote: true) do %>
+
+<%= link_to(likes_path(user_id: current_user.id, likable_id: post_id, likable_type: likable_type), class: 'button white commentlink',method: 'post', remote: true) do %>
   <span class="text-dark"><i class="fa fa-thumbs-o-up" style="font-size:20px;color:black"></i>
     Like
   </span>

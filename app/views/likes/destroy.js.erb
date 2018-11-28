@@ -1,1 +1,5 @@
-$("#like_button_of_<%=@initial%><%=params['likes_id']%>").html("<%= escape_javascript(render('likes/like_button', post_id: @post_id, likes_type: params['likes_type'])) %>");
+$("#like_button_of_<%=@initial%><%=params['likable_id']%>").html("<%= escape_javascript(render('likes/like_button', post_id: @post_id, likable_type: params['likable_type'])) %>");
+<% if @initial == 'p' %>
+  $("#like_button_of_<%=@initial%><%=params['likable_id']%>").prepend('<span class="lead" >(<%= @post.like_count %>)</span>')
+<% end %>
+

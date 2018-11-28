@@ -23,6 +23,7 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.new(post_params)
+    @post.like_count = 0
     respond_to do |format|
       if @post.save
         format.html {

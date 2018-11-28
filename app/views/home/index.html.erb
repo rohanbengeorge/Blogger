@@ -19,8 +19,8 @@
 
     <div class="col-md-8">
       <h3>Feed</h3>
-
-      <div class="dropdown ">
+  <div class="row">
+      <div class="dropdown d-inline-block col-sm-6">
           <input type="button" id="select_feed" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" value="Select Feeds">
           <ul id="feed-dropdown-menu" class="dropdown-menu">
             <li id='1'><%= link_to 'Personal Feeds', home_personal_feeds_path, remote:true %></li>
@@ -31,14 +31,14 @@
           </ul>
       </div>
 
-      <div class="dropdown ">
+      <div class="dropdown d-inline-block col-sm-6">
           <input type="button" id="select_sort" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" value="Sort By">
           <ul id="sort-dropdown-menu" class="dropdown-menu">
             <li id='1'><%= link_to 'Date', home_all_public_feeds_path(sort_type: 'Date'), remote:true %></li>
             <li id='2'><%= link_to 'Likes', home_all_public_feeds_path(sort_type: 'Likes'), remote:true %></li>
           </ul>
       </div>
-
+</div>
       <div id = "posts">
         <%= render @posts %>
       </div>

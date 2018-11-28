@@ -28,7 +28,7 @@ $( document ).on('turbolinks:load', function() {
     $("#sort-dropdown-menu").data("feed", ($(this).find('a').attr('href')));
     let feed_url = $("#sort-dropdown-menu").data('feed')
     $("#sort-dropdown-menu li a")[0].setAttribute('href', feed_url + '?sort_type=Date');
-    $("#sort-dropdown-menu li a")[1].setAttribute('href', feed_url + '?sort_type=Like');
+    $("#sort-dropdown-menu li a")[1].setAttribute('href', feed_url + '?sort_type=Likes');
   });
 
   // $("#sort-dropdown-menu li").click(function() {
@@ -73,8 +73,8 @@ $( document ).on('turbolinks:load', function() {
   });
 
   // function to close the serch's dropdown when out of focus
-  $("#search_input").on("focusout", function(e) {
-    $('.dropdown-toggle_search').dropdown("toggle");
-    $('#search_result').hide();
-  })
+  // $("#search_input").on("focusout", function(e) {
+  //   $('.dropdown-toggle_search').dropdown("toggle");
+  //   $('#search_result').hide();
+  // })
 });
