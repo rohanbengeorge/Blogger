@@ -24,6 +24,7 @@ gem 'bootstrap-will_paginate', '1.0.0'
 gem 'faker'
 gem 'acts-as-taggable-on', '~> 6.0'
 gem "nested_form"
+gem "actiontext", github: "rails/actiontext", require: "action_text"
 gem 'image_processing', '~> 1.2'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'

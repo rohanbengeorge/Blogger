@@ -29,14 +29,46 @@ $( document ).on('turbolinks:load', function() {
     let feed_url = $("#sort-dropdown-menu").data('feed')
     $("#sort-dropdown-menu li a")[0].setAttribute('href', feed_url + '?sort_type=Date');
     $("#sort-dropdown-menu li a")[1].setAttribute('href', feed_url + '?sort_type=Likes');
+
+    $("#filter-dropdown-menu li a")[0].setAttribute('href', feed_url + '?filter_type=last_day');
+    $("#filter-dropdown-menu li a")[1].setAttribute('href', feed_url + '?filter_type=last_week');
+    $("#filter-dropdown-menu li a")[2].setAttribute('href', feed_url + '?filter_type=last_month');
+    
   });
 
-  // $("#sort-dropdown-menu li").click(function() {
-  //   let feed_url = $("#sort-dropdown-menu").data('feed')
-  //   $("#sort-dropdown-menu li a")[0].setAttribute('href', feed_url + '?sort_type=Date');
-  //   $("#sort-dropdown-menu li a")[1].setAttribute('href', feed_url + '?sort_type=Like');
-  //   console.log("dddd")
-  // });
+  $("#sort-dropdown-menu li").click(function() {
+    // $("#sort-dropdown-menu").data("feed", ($(this).find('a').attr('href')));
+    let sort_url = ($(this).find('a').attr('href'))
+    let url = sort_url.split('?')
+    let param = url[1]
+    if (param.includes("&")) {
+      param = param.split('&')[1]
+    }
+    sort_url = url[0] + '?' + param
+
+    $("#filter-dropdown-menu li a")[0].setAttribute('href', sort_url + '&filter_type=last_day');
+    $("#filter-dropdown-menu li a")[1].setAttribute('href', sort_url + '&filter_type=last_week');
+    $("#filter-dropdown-menu li a")[2].setAttribute('href', sort_url + '&filter_type=last_month');
+    
+  });
+
+  $("#filter-dropdown-menu li").click(function() {
+    let filter_url = ($(this).find('a').attr('href'))
+    let url = filter_url.split('?')
+    let param = url[1]
+    if (param.includes("&")) {
+      param = param.split('&')[1]
+    }
+    filter_url = url[0] + '?' + param
+
+    console.log("in filter click");
+    console.log(($(this).find('a').attr('href')))
+    console.log(filter_url);
+    $("#sort-dropdown-menu li a")[0].setAttribute('href', filter_url + '&sort_type=Date');
+    $("#sort-dropdown-menu li a")[1].setAttribute('href', filter_url + '&sort_type=Likes');
+    
+  });
+
 
   // function to search
   $("#search_input").on("keyup", function(e) {

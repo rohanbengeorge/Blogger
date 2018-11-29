@@ -1,45 +1,37 @@
 <% provide(:title, @title) %>
 <div class="row">
-  <aside class="col-md-4">
+  <aside class="col-md-3">
     <section class="user_info">
-
-      <h1><%= @user.first_name %></h1>
-      <span><%= link_to "view my profile", @user %></span>
-      
+      <%= render 'shared/user_info' %>
     </section>
+    <hr>
     <section class="stats">
       <%= render 'shared/stats' %>
-      <% if @users.any? %>
-        <div class="user_avatars">
-          <% @users.each do |user| %>
-            <hr>
-            <p>
-              First name:
-              <%= user.first_name %>
-            </p>
-            <p>
-              Last name:
-              <%= user.last_name %>
-            </p>
-            <p>
-              Email:
-              <%= user.email %>
-            </p>
-            
-            
-             <% #=link_to gravatar_for(user, size: 30), user %>
-          <% end %>
-        </div>
-      <% end %>
+      <%= render 'follow_form' if signed_in? %>
     </section>
   </aside>
+
   <div class="col-md-8">
     <h3><%= @title %></h3>
     <% if @users.any? %>
-      <ul class="users follow">
-        <%#= render @users %>
-      </ul>
-      <%= will_paginate %>
+      <div class="container user_avatars">
+        <% @users.each do |user| %>
+          <div class="row ">
+            <hr>
+            <%= avatar_for(user) %>
+              <div>
+              Name:
+              <%= link_to name(user), user %>
+              </div>
+              <div>
+              Email:
+              <%= user.email %>
+              </div>
+          </div>
+        <% end %>
+        <%= will_paginate %>
+      </div>
     <% end %>
   </div>
+
 </div>

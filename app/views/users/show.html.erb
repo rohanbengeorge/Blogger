@@ -7,9 +7,11 @@
         <%= avatar_for(@user) %>
         <div><%= name(@user) %></div>
         <div><%= @user.email %></div>
-        <div><% if current_user.admin? || current_user == @user %>
-          <%= link_to 'Edit', edit_user_path(@user) %>
-        <% end %></div>
+        <div>
+          <% if current_user.admin? || current_user == @user %>
+              <%= link_to 'Edit', edit_user_path(@user) %>
+          <% end %>
+        </div>
       </h1>
     </section>
     <section class="stats">
