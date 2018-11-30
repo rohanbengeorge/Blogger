@@ -1,4 +1,11 @@
 $( document ).on('turbolinks:load', function() {
+  $('textarea').froalaEditor({
+    heightMin: 300,
+    heightMax: 300
+  }) 
+
+
+
   // function to modify modal
   $('#my-modal').on('show.bs.modal', function (e) {
     var user_id = $(e.relatedTarget).data('user');

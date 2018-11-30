@@ -23,6 +23,17 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.new(post_params)
+    @post.content = params[:content]
+    # add default count in migration
+    # check user before editing
+    #check validations in controller
+    #check validations  in model
+    #remove users in headers 
+    #create user  in modal
+    #check modal in ban user
+    #in ban user check base date
+    #move flash messages to local folder as contants
+    # check destroy return
     @post.like_count = 0
     respond_to do |format|
       if @post.save

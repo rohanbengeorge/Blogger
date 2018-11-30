@@ -13,8 +13,19 @@
 
 *= require_tree .
 *= require_self
+*= require trix
+
   */ 
 @import 'bootstrap';
+@import "froala_editor.min";
+@import "froala_style.min";
+@import "font-awesome-sprockets";
+@import "font-awesome";
+@import 'plugins/image_manager.min.css';
+@import 'plugins/image.min.css';
+@import 'plugins/fullscreen.min.css';
+@import 'plugins/emoticons.min.css';
+
 
 .disp-none {
   display: none;

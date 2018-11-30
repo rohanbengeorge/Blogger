@@ -19,3 +19,10 @@
 
 //= require users
 //= require_tree .
+//= require trix
+//= require froala_editor.min.js
+//= require plugins/image.min.js
+//= require plugins/image_manager.min.js
+//= require plugins/fullscreen.min.js
+//= require plugins/emoticons.min.js
+$('.content').froalaEditor();

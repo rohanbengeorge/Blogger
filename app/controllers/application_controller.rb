@@ -12,10 +12,12 @@ class ApplicationController < ActionController::Base
   end
 
   def check_user_is_admin
-    unless current_user.admin?
-      # flash[:error] = 'You must be logged in as a admin access this section'
-      redirect_to user_path(current_user)
-    end
+    # unless current_user.admin?
+    #   # flash[:error] = 'You must be logged in as a admin access this section'
+    #   redirect_to user_path(current_user)
+    # end
+    return if current_user.admin?
+    redirect_to user_path(current_user)
   end
 
 end

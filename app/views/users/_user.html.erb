@@ -1,20 +1,21 @@
-<li>
-  <div class="avatar_container">
-    <%= avatar_for(user) %>
-  </div>
-  <%= link_to name(user), user %>
-  <% if current_user.admin? && current_user != user %>
-    <%= link_to "delete", user, method:  :delete,
-                                  data: { confirm: "You sure?" } %> 
+<tr>
+    <div class="avatar_container">
+     <td><%= avatar_for(user) %></td> 
+    </div>
+  
+  <td class="p-2"><%= link_to name(user), user %></td>
+  <% if current_user.admin? || current_user == user %>
+    <td class="p-3"><%= link_to "Delete", user, method:  :delete,
+                                  data: { confirm: "You sure?" } %> </td>
     <% if user == current_user %>
-      <span >Current User</span>
+      <td class="p-3"><span >Current User</span></td>
     <% else%>
       <% if user.admin? %>
-        <%= link_to 'Remove as Admin', remove_admin_status_user_path(user), method: :post, data: { confirm: 'Are you sure?' } %>
+        <td class="p-3"><%= link_to 'Remove as Admin', remove_admin_status_user_path(user), method: :post, data: { confirm: 'Are you sure?' } %></td>
       <% else %>
-        <%= link_to 'Assign as Admin', assign_admin_status_user_path(user), method: :post, data: { confirm: 'Are you sure?' } %>
-        <%= link_to "Ban User", "", :class => "btn", "data-toggle" => "modal", "data-target" => "#my-modal", "data-user" => user.id %>
+        <td class="p-3"><%= link_to 'Assign as Admin', assign_admin_status_user_path(user), method: :post, data: { confirm: 'Are you sure?' } %></td>
+        <td class="p-3"><%= link_to "Ban User", "", :class => "btn", "data-toggle" => "modal", "data-target" => "#my-modal", "data-user" => user.id %></td>
       <% end %>
     <% end %>
   <% end %>
-</li>
+</tr>

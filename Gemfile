@@ -26,6 +26,10 @@ gem 'acts-as-taggable-on', '~> 6.0'
 gem "nested_form"
 gem "actiontext", github: "rails/actiontext", require: "action_text"
 gem 'image_processing', '~> 1.2'
+gem 'trix'
+gem "wysiwyg-rails"
+gem "font-awesome-sass"
+
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks

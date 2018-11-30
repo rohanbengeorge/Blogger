@@ -12,7 +12,7 @@ class CommentsController < ApplicationController
   end
 
   # GET /comments/1
-  # GET /comments/1.json
+  # GET /comments/:id.json
   def show; end
 
   # GET /comments/new
@@ -58,7 +58,7 @@ class CommentsController < ApplicationController
         format.json {
           render json: @comment.errors, status: :unprocessable_entity
         }
-        format.js
+        format.jsparams['post_id']
       end
     end
   end
@@ -106,5 +106,6 @@ class CommentsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def comment_params
     params.require(:comment).permit(:content, :post_id, :parent_id)
+        # .merge!(post_id: params['post_id'])
   end
 end

@@ -6,6 +6,7 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
 
   has_many :likes, as: :likable
+  has_rich_text :content
   acts_as_taggable
   # default_scope -> { order(created_at: :desc) }
   scope :by, ->(user) { where(user_id: user.id) }
