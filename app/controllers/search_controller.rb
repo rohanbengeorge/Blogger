@@ -6,11 +6,14 @@ class SearchController < ApplicationController
     search_text = params[:search_text]
     if search_text.start_with?('#')
       search_text = search_text.slice(1..-1)
-      @posts = Post.tagged_with(search_text, any: true)
-      followed_users = current_user.following_ids
-      @posts = @posts.where(user_id: followed_users)
-                     .or(@posts.where(is_public: true))
-      render 'home/tagged_feeds'
+      @posts = ActsAsTaggableOn::Tag.select('id','name').where("name like (?)","%#{search_text}%")
+      # @posts = Post.tagged_with(search_text, any: true)
+      # followed_users = current_user.following_ids
+      # @posts = @posts.where(user_id: followed_users)
+                    #  .or(@posts.where(is_public: true))      
+      # render 'home/tagged_feeds'
+      render json: @posts
+
     else
       @users = search_text.present? ?
                  User.select('id', 'first_name')

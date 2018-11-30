@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/rails/actiontext.git
+  revision: 18974137be2c4027dfcf430668edd712e7ec011b
+  specs:
+    actiontext (0.1.0)
+      nokogiri
+      rails (>= 5.2.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -231,6 +239,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  actiontext!
   acts-as-taggable-on (~> 6.0)
   bootstrap
   bootstrap-sass
@@ -260,7 +269,7 @@ DEPENDENCIES
   will_paginate (= 3.1.6)
 
 RUBY VERSION
-   ruby 2.3.1p112
+   ruby 2.5.1p57
 
 BUNDLED WITH
    1.17.1

@@ -81,18 +81,27 @@ $( document ).on('turbolinks:load', function() {
         data: { search_text: text }
         })
       .done(function ( data ) {
-        if(data.constructor == Array)
-        {
+        // if(data.constructor == Array)
+        // {
           if(data.length) {
+            console.log(data)
             $('#search_result').empty();
             //let divider = "<li class="dropdown-header">People</li> <li class="divider"></li>"
-            for ( let obj of data ){
-              let html_link = '<li><a href=' + '/users/'+ obj.id +'>'+obj.first_name + '</a>' + '</li>';
-              $('#search_result').append(html_link)
+            if (data[0].first_name){
+              for ( let obj of data ){
+                let html_link = '<li><a href=' + '/users/'+ obj.id +'>'+obj.first_name + '</a>' + '</li>';
+                $('#search_result').append(html_link)
+              }
+            }
+            else{
+              for ( let obj of data ){
+                let html_link = '<li><a data-remote="true" href=' + '/tags/'+ obj.name +'>#'+obj.name + '</a>' + '</li>';
+                $('#search_result').append(html_link)
+              }
             }
             $('#search_result').show();
             $('.dropdown-toggle_search').dropdown("toggle");
-          }
+          // }
         }
         else
         {
@@ -104,9 +113,14 @@ $( document ).on('turbolinks:load', function() {
     }
   });
 
-  // function to close the serch's dropdown when out of focus
-  // $("#search_input").on("focusout", function(e) {
-  //   $('.dropdown-toggle_search').dropdown("toggle");
-  //   $('#search_result').hide();
-  // })
+  //  function to close the serch's dropdown when out of focus
+  $("#search_input").on("focusout", function(e) {
+
+    setTimeout(function(){ 
+      $('.dropdown-toggle_search').dropdown("toggle");
+      $('#search_result').hide();
+    }, 500);
+  })
+
+
 });
