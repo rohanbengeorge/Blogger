@@ -11,4 +11,5 @@ class Post < ApplicationRecord
   # default_scope -> { order(created_at: :desc) }
   scope :by, ->(user) { where(user_id: user.id) }
   scope :only_public, -> { where(is_public: true) }
+  validates :title, presence: true
 end

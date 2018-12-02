@@ -36,7 +36,7 @@
     </div>
     <%= link_to 'Show', [current_user, post]  %>
     <%= link_to 'Edit', edit_user_post_path(id:post.id, user_id: current_user.id) %>
-    <%= link_to 'Destroy', [current_user,post], method: :delete, data: { confirm: 'Are you sure?' } %>
+    <%= link_to 'Delete', [current_user,post], method: :delete, data: { confirm: 'Are you sure?' } %>
     <br>
     <span class="timestamp">
       Posted <%= time_ago_in_words(post.created_at) %> ago.

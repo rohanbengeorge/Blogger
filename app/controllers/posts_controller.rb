@@ -3,6 +3,9 @@
 # Controller for post CRUD operation
 class PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
+  before_action :set_locale 
+  before_action :authorized_user, only: %i[index show destroy]
+  before_action :correct_user, only: %i[edit update ]
 
   def index
     @user = User.find(params[:user_id])
@@ -24,22 +27,11 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.new(post_params)
     @post.content = params[:content]
-    # add default count in migration
-    # check user before editing
-    #check validations in controller
-    #check validations  in model
-    #remove users in headers 
-    #create user  in modal
-    #check modal in ban user
-    #in ban user check base date
-    #move flash messages to local folder as contants
-    # check destroy return
-    @post.like_count = 0
     respond_to do |format|
       if @post.save
         format.html {
           redirect_back(fallback_location: root_path,
-                        notice: 'Post was successfully created.')
+                        notice: t('post.create_message'))
         }
         format.json { render :show, status: :created, location: @post }
       else
@@ -54,7 +46,7 @@ class PostsController < ApplicationController
       if @post.update(post_params)
         format.html {
           redirect_back(fallback_location: root_path,
-                        notice: 'Post was successfully updated.')
+                        notice: t('post.update_message'))
         }
         format.json { render :show, status: :ok, location: @post }
       else
@@ -65,9 +57,13 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post.destroy
+    if @post.destroy 
+      notice_msg = t('post.del_success_msg')
+    else
+      notice_msg = t('post.del_unsuccessful_msg')
+    end
     respond_to do |format|
-      format.html { redirect_back(fallback_location: root_path, notice: 'Post was successfully destroyed.') }
+      format.html { redirect_back(fallback_location: root_path, notice: notice_msg) }
       format.json { head :no_content }
     end
   end
@@ -76,6 +72,21 @@ class PostsController < ApplicationController
 
   def set_post
     @post = Post.find(params[:id])
+  end
+  
+  def authorized_user
+    @user = User.find(params[:user_id])
+    return if current_user.admin? || current_user == @user
+    redirect_to root_path
+  end
+
+  def correct_user
+    @user = User.find(params[:user_id])
+    redirect_to(root_url) unless current_user == @user
+  end
+
+  def set_locale  
+    I18n.locale = params[:locale] || I18n.default_locale
   end
 
   def post_params

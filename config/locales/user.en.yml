@@ -1,0 +1,9 @@
+en:
+  user:
+      create_message: "User was successfully created"
+      update_msg: 'User details was successfully updated.'
+      del_success_msg : 'User was successfully deleted.'
+      del_unsuccessful_msg : 'Sorry,The User was not deleted.'
+      admin_success_msg: 'ADMIN status was assigned succesfully.'
+      admin_unsuccessful_msg: 'ADMIN status was removed succesfully.'
+

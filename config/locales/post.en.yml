@@ -1,0 +1,6 @@
+en:
+  post:
+      create_message: "Post was successfully created"
+      update_msg: 'Post was successfully updated.'
+      del_success_msg : 'Post was successfully deleted.'
+      del_unsuccessful_msg : 'Sorry,The post was not deleted.'

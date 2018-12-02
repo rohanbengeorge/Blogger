@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   before_action :check_user_is_admin, only: %i[ban_user assign_admin_status
                                                remove_admin_status]
   before_action :correct_user, only: [:edit, :update]
+  before_action :set_locale 
 
   def index
     @users = User.paginate(:page => params[:page])
@@ -18,7 +19,9 @@ class UsersController < ApplicationController
   def show
     @user = User.find params[:id]
     @posts = Post.by @user
-    @posts = @posts.only_public unless current_user.follows? @user
+    unless (current_user.follows? @user) || current_user == @user
+      @posts = @posts.where(is_public: true)
+    end
   end
 
   def new
@@ -34,7 +37,7 @@ class UsersController < ApplicationController
       if @user.update(user_params)
         format.html {
           redirect_back(fallback_location: root_path,
-                        notice: 'User was successfully updated.')
+                        notice: t('user.update_message'))
         }
         format.json { render :show, status: :ok, location: @user }
       else
@@ -45,11 +48,15 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user.destroy
+    if @user.destroy
+      notice_msg =  t('user.del_success_msg')
+    else
+      notice_msg =  t('user.del_unsuccessful_msg')
+    end
     respond_to do |format|
       format.html {
         redirect_back(fallback_location: root_path,
-                      notice: 'User was successfully destroyed.')
+                      notice: notice_msg)
       }
       format.json { head :no_content }
     end
@@ -58,17 +65,19 @@ class UsersController < ApplicationController
   def assign_admin_status
     @user.update_attribute :admin, true
     redirect_back(fallback_location: root_path,
-                  notice: 'ADMIN status was assigned succesfully.')
+                  notice: t('user.admin_success_msg'))
   end
 
   def remove_admin_status
     @user.update_attribute :admin, false
     redirect_back(fallback_location: root_path,
-                  notice: 'ADMIN status was removed succesfully.')
+                  notice: t('user.admin_unsuccessful_msg'))
   end
 
   def ban_user
-    @user.ban_till_date = Date.today + params[:ban_days].to_i.days
+    @user.ban_till_date = Date.today if @user.ban_till_date.nil?
+    base_date = @user.ban_till_date >= Date.today ? @user.ban_till_date : Date.today
+    @user.ban_till_date = base_date + params[:ban_days].to_i.days
     @user.save
     render json: { status: 'ok' }
   end
@@ -93,6 +102,10 @@ class UsersController < ApplicationController
 
   def correct_user
     redirect_to(root_url) unless current_user == @user
+  end
+
+  def set_locale  
+    I18n.locale = params[:locale] || I18n.default_locale
   end
 
   def user_params

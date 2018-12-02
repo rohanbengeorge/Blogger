@@ -1,0 +1,9 @@
+en:
+  comment:
+      create_success_mesg: "Comment was successfully created"
+      create_unsuccessful_msg: 'Comment was not created.'
+      update_msg: 'Comment was successfully updated.'
+      del_success_msg : 'Comment was successfully deleted.'
+      del_unsuccessful_msg : 'Sorry,The comment was not deleted.'
+      del_not_admin_msg : 'You need to be a admin to edit others comments'
+      

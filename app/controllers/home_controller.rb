@@ -18,7 +18,6 @@ class HomeController < ApplicationController
   end
 
   def all_feeds
-    p "+++++++++++++++++++",@posts
     respond_to do |format|
       format.html { redirect_to root_path }
       format.js
